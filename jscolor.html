@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColorFlipper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        background-color: lightcyan;
+    }
+
+    nav {
+        height: 10vh;
+        background-color: #555;
+    }
+
+    nav h4 {
+        margin: 20px 0 0 0;
+        font-size: 35px;
+        color: #D6A2E8;
+        font-family: cursive;
+    }
+
+    nav ul li {
+        padding: 20px;
+        list-style: none;
+        float: right;
+        margin-top: -60px;
+        margin-right: 50px;
+        font-size: 28px;
+    }
+
+    nav ul li a {
+        color: white;
+    }
+
+    .main-container {
+        margin-top: 12%;
+        margin-left: 30%;
+        height: 100px;
+        width: 400px;
+        border: 1px solid black;
+        border-radius: 10px;
+        background: black;
+        color: whitesmoke;
+    }
+
+
+
+    .main-container h2 {
+        text-align: center;
+    }
+
+    #btn {
+        margin-left: 590px;
+        background: #ff4757;
+        margin-top: 20px;
+        width: 150px;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+
+    span {
+        color: #7bed9f;
+    }
+</style>
+
+<body>
+
+    <nav>
+        <div class="nav-center container">
+            <h4>Color Flipper</h4>
+            <ul class="nav-links">
+                <li>
+                    <a href="#">hex</a>
+                </li>
+                <li>
+                    <a href="#">Simple</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <h2>backgroundColor : <span class="color"> <br> #f1f5f8</span></h2>
+    </main>
+    <button class="btn btn-hero btn " id="btn">Change Color</button>
+
+
+
+    <script>
+
+        const colors = ["green", "red", "rgb(133,122,200)", "#f15025"];
+        const btn = document.getElementById('btn');
+        const color = document.querySelector(".color");
+
+        btn.addEventListener("click", function () {
+            // console.log(randomNumber);
+            const randomNumber = getRandonNumber();         
+            document.body.style.backgroundColor = colors[randomNumber];
+            color.textContent = colors[randomNumber];
+
+        });
+
+        function getRandonNumber() {
+            return Math.floor(Math.random() * colors.length);
+        }
+    </script>
+    <script>
+        
+    </script>
+</body>
+
+</html>
