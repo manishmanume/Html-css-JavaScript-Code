@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: monospace;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        background: url(images/Night.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: whitesmoke;
+    }
+
+    #Responsetext {
+        text-align: center;
+        cursor: pointer;
+    }
+
+    #inputbox {
+        background-color: White;
+        color: #555;
+        width: 720px;
+        padding: 15px;
+        border: none;
+        border-radius: 50px;
+        position: absolute;
+        outline: none;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-size: 27px;
+
+    }
+</style>
+
+<body>
+    <h1 id="Responsetext"></h1>
+    <input id="inputbox" type="text" placeholder="Type to talk......" onkeydown="isEnter()">
+
+    <script>
+        function isEnter() {
+            var textBox_val = document.getElementById('inputbox').value
+            if (textBox_val != "") {
+                if (event.keyCode == 13)
+                    main()
+            }
+        }
+
+        function main(){
+           var textBox_val = document.getElementById("inputbox").value
+           var ResponseText_val = document.getElementById('Responsetext')
+
+           var FormateInput = textBox_val.toLowerCase().trim();
+
+           if(FormateInput.includes('hi') || FormateInput.includes('hello'))
+           ResponseText_val.innerHTML = "hello"
+
+           else if (FormateInput.includes("How are You"))
+           ResponseText_val.innerHTML = "I am fine! Thanks for asking!"
+            
+            else if (FormateInput.includes('open google'))
+            {
+                ResponseText_val.innerHTML= "opening google"
+                window.open('https://www.google.com', '_blank')
+            }
+
+            else if (FormateInput.includes('open youtube'))
+            {
+                ResponseText_val.innerHTML= "opening youtube"
+                window.open('https://youtube.com/', '_blank')
+            }
+
+            else if (FormateInput.includes('open instagram'))
+            {
+                ResponseText_val.innerHTML= "opening instagram"
+                window.open('https://www.instagram.com/', '_blank')
+            }
+
+            else if (FormateInput.includes('open facebook'))
+            {
+                ResponseText_val.innerHTML= "opening facebook"
+                window.open('https://www.facebook.com/', '_blank')
+            }
+
+            else if (FormateInput.includes('open whatsapp'))
+            {
+                ResponseText_val.innerHTML= "opening whatsapp"
+                window.open('https://www.whatsapp.com/', '_blank')
+            }
+
+             else if (FormateInput.includes('open amazon'))
+            {
+                ResponseText_val.innerHTML= "opening amazon"
+                window.open('https://www.amazon.in/', '_blank')
+            }
+
+            
+            else if (FormateInput.includes('open flipcart'))
+            {
+                ResponseText_val.innerHTML= "opening flipcart"
+                window.open('https://www.flipkart.com/', '_blank')
+            }
+
+            else if (FormateInput.includes('open ajio'))
+            {
+                ResponseText_val.innerHTML= "opening ajio"
+                window.open('https://www.ajio.com/', '_blank')
+            }
+
+            else
+            ( ResponseText_val.innerHTML ="Sorry, I can't understand you ")
+        }
+    </script>
+</body>
+
+</html>
