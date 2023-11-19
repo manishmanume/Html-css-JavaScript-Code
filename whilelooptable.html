@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration...</title>
+
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        width: 100%;
+        background-color: rgb(67, 76, 84);
+        color: whitesmoke;
+    }
+
+    .hero {
+        height: 400px;
+        width: 400px;
+        border: none;
+        margin-top: 40px;
+        border-radius: 10px;
+        margin-left: 600px;
+        box-shadow: 4px 7px 10px lightslategrey;
+    }
+
+    h2 {
+        text-align: center;
+        margin-top: 20px;
+        color: darkseagreen;
+    }
+
+    input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin: 10px 0;
+        margin-left: 25px;
+        margin-top: 20px;
+        background-color: rgb(33, 47, 60);
+        color: whitesmoke;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    input::placeholder {
+        color: whitesmoke;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .btna {
+        width: 80px;
+        padding: 10px;
+        border: none;
+        border-radius: 10px;
+        margin: 20px 0 0 10px;
+        background-color: rgb(81, 57, 67);
+        color: whitesmoke;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    table {
+        width: 80%;
+        margin: 30px 0 0 100px;
+        border-collapse: collapse;
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    thead th {
+        padding: 10px;
+        background-color: rgb(33, 47, 60);
+        color: white;
+        font-size: 20px;
+    }
+
+    tbody tr td {
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: rgb(202, 207, 210);
+        color: black;
+    }
+
+    button {
+        width: 80px;
+        text-align: center;
+        margin: 3px;
+        padding: 7px;
+        border-radius: 10px;
+        border: none;
+        background-color: rgb(33, 47, 60);
+        color: whitesmoke;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .mut {
+        background-color: whitesmoke;
+        color: black;
+        margin-right: 10px;
+    }
+</style>
+
+<body>
+    <div class="hero">
+        <h2>Registration Here....</h2>
+        <input type="text" placeholder="Name" id="name">
+        <input type="text" placeholder="Father Name" id="fname">
+        <input type="text" placeholder="Class" id="clas">
+        <input type="text" placeholder="Fees" id="fees">
+        <br>
+        <button class="btna" onclick="Sout()">Submit</button>
+        <button class="btna" onclick="Show()">Show</button>
+        <button class="btna" onclick="Clean()">Clear</button>
+        <button class="btna" onclick="Change()">Update</button>
+    </div>
+    <table border="2">
+        <thead>
+            <th style="width: 250px;"><input onclick="sek()" id="txtcheck" type="checkbox"
+                    style="width: 30px; margin-top: -5px;">SelectAll <button class="mut"
+                    onclick="Delt()">DeleteAll</button></th>
+            <th>Name</th>
+            <th>Father Name</th>
+            <th>Class</th>
+            <th>Fees</th>
+            <th style="width: 200px;">Operation</th>
+        </thead>
+        <tbody id="Manu">
+
+        </tbody>
+    </table>
+    <script>
+        Show()
+        function Clean() {
+            x = confirm('Are You Sure?')
+            if (x) {
+                localStorage.clear(x)
+                Show()
+            }
+        }
+        function reset() {
+            name = document.getElementById('name').value = ''
+            fname = document.getElementById('fname').value = ''
+            clas = document.getElementById('clas').value = ''
+            fees = document.getElementById('fees').value = ''
+        }
+
+        var input = ""
+        function Delt() {
+            x = confirm("Are you sure")
+            row = document.getElementById('Manu').getElementsByTagName('tr')
+            i = 0
+            while (i <= row.length - 1) {
+                 cell = row[i].getElementsByTagName("td")
+                 input = cell[0].getElementsByTagName("input")
+                
+                  if (input[0].checked == true){
+                    input.id=i
+                    arrObj=JSON.parse(localStorage.getItem('first'))
+                    arrObj.splice(input.id)
+                    localStorage.setItem('first',JSON.stringify(arrObj))
+                    Show()
+
+                  }
+                  i=i+1
+                  document.getElementById('txtcheck').checked = false
+
+
+                }
+            }       
+           
+        
+
+        function sek() {
+            if (document.getElementById('txtcheck').checked == true) {
+                row = document.getElementById('Manu').getElementsByTagName('tr')
+                i = 0
+                while (i <= row.length - 1) {
+                    cell = row[i].getElementsByTagName('td')
+                    check = cell[0].getElementsByTagName('input')
+                    check[0].checked = true
+                    i = i + 1
+                }
+            }
+            else {
+                row = document.getElementById('Manu').getElementsByTagName('tr')
+                i = 0
+                while (i <= row.length - 1) {
+                    cell = row[i].getElementsByTagName('td')
+                    check = cell[0].getElementsByTagName('input')
+                    check[0].checked = false
+                    i = i + 1
+                }
+            }
+        }
+
+        var bid = ""
+        function Change() {
+            name = document.getElementById('name').value
+            fname = document.getElementById('fname').value
+            clas = document.getElementById('clas').value
+            fees = document.getElementById('fees').value
+
+
+
+            var Obj = {
+                Name: name,
+                Fname: fname,
+                Clas: clas,
+                Fees: fees
+            }
+            arrObj = JSON.parse(localStorage.getItem('first'))
+            arrObj.splice(bid, 1, Obj)
+            localStorage.setItem('first', JSON.stringify(arrObj))
+            Show()
+            reset()
+
+        }
+
+        function Edit(Edit) {
+
+            bid = Edit.id
+            arrObj = JSON.parse(localStorage.getItem('first'))
+            document.getElementById('name').value = arrObj[Edit.id].Name
+            document.getElementById('fname').value = arrObj[Edit.id].Fname
+            document.getElementById('clas').value = arrObj[Edit.id].Clas
+            document.getElementById('fees').value = arrObj[Edit.id].Fees
+
+
+
+        }
+
+        function Show() {
+            document.getElementById('Manu').innerHTML = ''
+            arrObj = JSON.parse(localStorage.getItem('first'))
+
+            // console.log(arrObj);
+
+            i = 0
+            while (i <= arrObj.length - 1) {
+                row = document.createElement('tr')
+
+                cell = document.createElement('td')
+                cell1 = document.createElement('td')
+                cell2 = document.createElement('td')
+                cell3 = document.createElement('td')
+                cell4 = document.createElement('td')
+                cell5 = document.createElement('td')
+
+                buttondel = document.createElement('button')
+                buttondel.innerHTML = "Delete"
+                buttondel.id = i
+                buttondel.setAttribute('onclick', 'del(this)')
+                cell5.append(buttondel)
+
+                buttonEdt = document.createElement('button')
+                buttonEdt.innerHTML = "Edit"
+                buttonEdt.id = i
+                buttonEdt.setAttribute('onclick', 'Edit(this)')
+                cell5.append(buttonEdt)
+
+                inpcheck = document.createElement("input")
+                inpcheck.type = "checkbox"
+                cell.append(inpcheck)
+
+                cell1.innerHTML = arrObj[i].Name
+                cell2.innerHTML = arrObj[i].Fname
+                cell3.innerHTML = arrObj[i].Clas
+                cell4.innerHTML = arrObj[i].Fees
+
+
+                row.append(cell)
+                row.append(cell1)
+                row.append(cell2)
+                row.append(cell3)
+                row.append(cell4)
+                row.append(cell5)
+
+                document.getElementById('Manu').append(row)
+                i = i + 1
+            }
+        }
+
+        function del(cancel) {
+            arrObj = JSON.parse(localStorage.getItem('first'))
+            arrObj.splice(cancel.id, 1)
+            localStorage.setItem('first', JSON.stringify(arrObj))
+            Show()
+        }
+
+        var arrObj = []
+        function Sout() {
+            arrObj = JSON.parse(localStorage.getItem('first'))
+
+            if (arrObj == null) {
+                arrObj = []
+            }
+
+            name = document.getElementById('name').value
+            fname = document.getElementById('fname').value
+            clas = document.getElementById('clas').value
+            fees = document.getElementById('fees').value
+
+            if (name == "" || fname == "" || clas == "" || fees == "") {
+                alert('Please Enter your detailed')
+                return
+            }
+
+            var Obj = {
+                Name: name,
+                Fname: fname,
+                Clas: clas,
+                Fees: fees
+            }
+            arrObj.push(Obj)
+
+            localStorage.setItem('first', JSON.stringify(arrObj))
+            Show()
+            reset()
+        }
+
+    </script>
+</body>
+
+</html>
